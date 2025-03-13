@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\aless\\Desktop\\gioco dell impiccato\\gioco dell impiccato\\gioco dell impiccato.csproj": {}
+    "C:\\Users\\aless\\Desktop\\gioco_dell_impicched\\gioco dell impiccato\\gioco dell impiccato.csproj": {}
   },
   "projects": {
-    "C:\\Users\\aless\\Desktop\\gioco dell impiccato\\gioco dell impiccato\\gioco dell impiccato.csproj": {
+    "C:\\Users\\aless\\Desktop\\gioco_dell_impicched\\gioco dell impiccato\\gioco dell impiccato.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\aless\\Desktop\\gioco dell impiccato\\gioco dell impiccato\\gioco dell impiccato.csproj",
+        "projectUniqueName": "C:\\Users\\aless\\Desktop\\gioco_dell_impicched\\gioco dell impiccato\\gioco dell impiccato.csproj",
         "projectName": "gioco dell impiccato",
-        "projectPath": "C:\\Users\\aless\\Desktop\\gioco dell impiccato\\gioco dell impiccato\\gioco dell impiccato.csproj",
+        "projectPath": "C:\\Users\\aless\\Desktop\\gioco_dell_impicched\\gioco dell impiccato\\gioco dell impiccato.csproj",
         "packagesPath": "C:\\Users\\aless\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\aless\\Desktop\\gioco dell impiccato\\gioco dell impiccato\\obj\\",
+        "outputPath": "C:\\Users\\aless\\Desktop\\gioco_dell_impicched\\gioco dell impiccato\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\aless\\AppData\\Roaming\\NuGet\\NuGet.Config",

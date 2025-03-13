@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "gioco dell impiccato/1.0.0": {
+        "runtime": {
+          "gioco dell impiccato.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "gioco dell impiccato/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
