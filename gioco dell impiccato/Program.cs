@@ -1,13 +1,20 @@
-﻿Console.WriteLine("Ben venuto giocatore, questo e' il gioco dell impiccato.\n" +
+﻿using System;
+
+Console.WriteLine("Ben venuto giocatore, questo e' il gioco dell impiccato.\n" +
     "Questo gioco consiste nell cercare di indovinare la parola con un massimo di errori.\n"+
     "Hai a disposizione di tre diffolta, facile(1), media(2) e difficile(3)'.\n" +
     "Buona fortuna giocatore e buon divertimento");
 string difficolta = "";
-int parola = 0;
-Console.WriteLine("Che difficoltà scegli ? ");
+int tentativo = 0;
+Console.WriteLine("Che difficoltà scegli ?\n" +
+    "facile(1), 15 tentativi\n" +
+    "media(2), 10 tentativi\n" +
+    "difficile(3), 5 tentativi");
 difficolta = Console.ReadLine();
-string parolaStr = parola.ToString();
 string trattino = " ";
+string parolaTrovata = " ";
+char[] lettere;
+string parolaScelta = "";
 //CONTROLLO DIFFICOLTA':
 for (int i = 0; i < 3; i++)
 {
@@ -32,38 +39,48 @@ for (int i = 0; i < 3; i++)
         i = 0;
         difficolta = Console.ReadLine();
     }
+    Console.WriteLine("I tuoi tentativi rimasti sono: " + tentativo);
 }
 //IDENTIFICO LA PAROLA SCELTA RANDOMICAMENTE DOPO LA DIFFICOLTA'
+//aggiungere una if che controlla se la parola è stata trovata e in caso si aggiungere un for che crei una nuova parola
 if (difficolta == "facile" || difficolta == "1")
 {
     //Parole semplici
+    tentativo = 15;
     string filePath1 = "parole_semplici.txt";
     string[] lines1 = File.ReadAllLines(filePath1); // Legge tutte le righe e le mette in un vettore
     Random rdn = new Random();
     int f = rdn.Next(lines1.Length);
-    parola = lines1[f].Length;
-    trattino = new string('_', parola);
+    parolaScelta = lines1[f];
+    trattino = new string('_', parolaScelta.Length);
     Console.WriteLine(trattino);
 }
 else if (difficolta == "media" || difficolta == "2")
 {
     //Parole medie
+    tentativo = 10;
     string filePath2 = "parole_medie.txt";
     string[] lines2 = File.ReadAllLines(filePath2); // Legge tutte le righe e le mette in un vettore
     Random rdn = new Random();
     int m = rdn.Next(lines2.Length);
-    parola = lines2[m].Length;
-    trattino = new string('_', parola);
+    parolaScelta = lines2[m];
+    trattino = new string('_', parolaScelta.Length);
     Console.WriteLine(trattino);
 }
 else if (difficolta == "difficile" || difficolta == "3")
 {
     //Parole difficili
+    tentativo = 5;
     string filePath3 = "parole_difficili.txt";
     string[] lines3 = File.ReadAllLines(filePath3); // Legge tutte le righe e le mette in un vettore
     Random rdn = new Random();
     int d = rdn.Next(lines3.Length);
-    parola = lines3[d].Length;
-    trattino = new string('_', parola);
+    parolaScelta = lines3[d];
+    trattino = new string('_', parolaScelta.Length);
     Console.WriteLine(trattino);
+}
+//tovare un modo per far si che quando si indovina una lettera venga scrutta ma le restanti no
+while (tentativo > 0 && trattino.Contains("_"))
+{
+    
 }
