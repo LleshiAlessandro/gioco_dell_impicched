@@ -11,31 +11,17 @@ for (int i = 0; i < 3; i++)
     if (difficolta == "facile" || difficolta == "1")
     {
         Console.WriteLine("hai scelto la difficolta' minima");
-        //Parole semplici
-        string filePath1 = "parole_semplici.txt";
-
-        string[] lines1 = File.ReadAllLines(filePath1); // Legge tutte le righe e le mette in un vettore
         i = 3;
     }
     else if (difficolta == "media" || difficolta == "2")
     {
         Console.WriteLine("hai scelto la difficolta' media");
-        //Parole medie
-        string filePath2 = "parole_medie.txt";
-
-        string[] lines2 = File.ReadAllLines(filePath2); // Legge tutte le righe e le mette in un vettore
         i = 3;
     }
     else if (difficolta == "difficile" || difficolta == "3")
     {
         Console.WriteLine("hai scelto la difficolta difficile");
-
-        //Parole difficili
-        string filePath3 = "parole_difficili.txt";
-
-        string[] lines3 = File.ReadAllLines(filePath3); // Legge tutte le righe e le mette in un vettore
         i = 3;
-
     }
     else
     {
@@ -43,4 +29,32 @@ for (int i = 0; i < 3; i++)
         i = 0;
         difficolta = Console.ReadLine();
     }
+}
+//IDENTIFICO LA PAROLA SCELTA RANDOMICAMENTE DOPO LA DIFFICOLTA'
+if (difficolta == "facile" || difficolta == "1")
+{
+    //Parole semplici
+    string filePath1 = "parole_semplici.txt";
+    string[] lines1 = File.ReadAllLines(filePath1); // Legge tutte le righe e le mette in un vettore
+    Random rdn = new Random();
+    int f = rdn.Next(lines1.Length);
+    Console.WriteLine(lines1[f]);
+}
+else if (difficolta == "media" || difficolta == "2")
+{
+    //Parole medie
+    string filePath2 = "parole_medie.txt";
+    string[] lines2 = File.ReadAllLines(filePath2); // Legge tutte le righe e le mette in un vettore
+    Random rdn = new Random();
+    int m = rdn.Next(lines2.Length);
+    Console.WriteLine(lines2[m]);
+}
+else if (difficolta == "difficile" || difficolta == "3")
+{
+    //Parole difficili
+    string filePath3 = "parole_difficili.txt";
+    string[] lines3 = File.ReadAllLines(filePath3); // Legge tutte le righe e le mette in un vettore
+    Random rdn = new Random();
+    int d = rdn.Next(lines3.Length);
+    Console.WriteLine(lines3[d]);
 }
