@@ -3,8 +3,11 @@
     "Hai a disposizione di tre diffolta, facile(1), media(2) e difficile(3)'.\n" +
     "Buona fortuna giocatore e buon divertimento");
 string difficolta = "";
+int parola = 0;
 Console.WriteLine("Che difficoltà scegli ? ");
 difficolta = Console.ReadLine();
+string parolaStr = parola.ToString();
+string trattino = " ";
 //CONTROLLO DIFFICOLTA':
 for (int i = 0; i < 3; i++)
 {
@@ -38,7 +41,9 @@ if (difficolta == "facile" || difficolta == "1")
     string[] lines1 = File.ReadAllLines(filePath1); // Legge tutte le righe e le mette in un vettore
     Random rdn = new Random();
     int f = rdn.Next(lines1.Length);
-    Console.WriteLine(lines1[f]);
+    parola = lines1[f].Length;
+    trattino = new string('_', parola);
+    Console.WriteLine(trattino);
 }
 else if (difficolta == "media" || difficolta == "2")
 {
@@ -47,7 +52,9 @@ else if (difficolta == "media" || difficolta == "2")
     string[] lines2 = File.ReadAllLines(filePath2); // Legge tutte le righe e le mette in un vettore
     Random rdn = new Random();
     int m = rdn.Next(lines2.Length);
-    Console.WriteLine(lines2[m]);
+    parola = lines2[m].Length;
+    trattino = new string('_', parola);
+    Console.WriteLine(trattino);
 }
 else if (difficolta == "difficile" || difficolta == "3")
 {
@@ -56,5 +63,7 @@ else if (difficolta == "difficile" || difficolta == "3")
     string[] lines3 = File.ReadAllLines(filePath3); // Legge tutte le righe e le mette in un vettore
     Random rdn = new Random();
     int d = rdn.Next(lines3.Length);
-    Console.WriteLine(lines3[d]);
+    parola = lines3[d].Length;
+    trattino = new string('_', parola);
+    Console.WriteLine(trattino);
 }
