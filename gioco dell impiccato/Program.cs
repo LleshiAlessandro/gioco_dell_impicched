@@ -146,7 +146,12 @@ while (tentativo > 0 && trattino.Contains("_"))
     char lettera_indovinata = char.ToLower(Console.ReadKey().KeyChar);
     Console.WriteLine();
     bool lettera_trovata = false;
-    lettere = trattino.ToCharArray();
+
+    lettere = new char[trattino.Length];  // Creo un array di caratteri con la stessa lunghezza della stringa
+    for (int i = 0; i < trattino.Length; i++)
+    {
+        lettere[i] = trattino[i];  // Copio ogni carattere di trattino nell'array lettere
+    }
 
     for (int i = 0; i < parolaScelta.Length; i++)
     {
@@ -157,7 +162,7 @@ while (tentativo > 0 && trattino.Contains("_"))
         }
     }
 
-    trattino = new string(lettere);
+    trattino = new string(lettere);  // Ricostruisco la stringa trattino data la variabile lettere
 
     if (lettera_trovata)
     {
