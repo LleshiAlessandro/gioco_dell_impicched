@@ -82,5 +82,43 @@ else if (difficolta == "difficile" || difficolta == "3")
 //tovare un modo per far si che quando si indovina una lettera venga scrutta ma le restanti no
 while (tentativo > 0 && trattino.Contains("_"))
 {
-    
+    Console.WriteLine("\nTentativi rimasti: " + tentativo);
+    Console.Write("Indovina una lettera: ");
+    char guessedLetter = char.ToLower(Console.ReadKey().KeyChar);
+    Console.WriteLine();
+
+    bool lettera_trovata = false;
+    lettere = trattino.ToCharArray();
+
+    for (int i = 0; i < parolaScelta.Length; i++)
+    {
+        if (parolaScelta[i] == guessedLetter && lettere[i] == '_')
+        {
+            lettere[i] = guessedLetter;
+            lettera_trovata = true;
+        }
+    }
+
+    trattino = new string(lettere);
+
+    if (lettera_trovata)
+    {
+        Console.WriteLine("Parola attuale: " + trattino);
+    }
+    else
+    {
+        tentativo--;
+        Console.WriteLine("Lettera non trovata.");
+    }
+
+    if (!trattino.Contains("_"))
+    {
+        Console.WriteLine("Hai indovinato la parola: " + parolaScelta);
+        break;
+    }
+}
+
+if (tentativo == 0)
+{
+    Console.WriteLine("Hai esaurito i tentativi. La parola era: " + parolaScelta);
 }
