@@ -247,8 +247,8 @@ while (tentativo > 0 && trattino.Contains("_"))
     }
 
 }
-Console.ForegroundColor = ConsoleColor.White;
 
+Console.ForegroundColor = ConsoleColor.White;
 if (tentativo == 0)
 {
     Console.WriteLine("Hai esaurito i tentativi. La parola era: " + parolaScelta);
