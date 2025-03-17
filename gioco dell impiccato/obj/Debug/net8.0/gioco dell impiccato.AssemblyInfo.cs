@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("gioco dell impiccato")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+be0776bb6ea6f0adb57d4048718b3a3ed6450e68")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a228a82ee6a226750c60848f36289cf7bb36be15")]
 [assembly: System.Reflection.AssemblyProductAttribute("gioco dell impiccato")]
 [assembly: System.Reflection.AssemblyTitleAttribute("gioco dell impiccato")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

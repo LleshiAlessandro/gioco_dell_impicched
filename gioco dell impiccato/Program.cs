@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 
 Console.WriteLine("Ben venuto giocatore, questo e' il gioco dell impiccato.\n" +
     "Questo gioco consiste nell cercare di indovinare la parola con un massimo di errori.\n" +
@@ -8,7 +9,7 @@ Console.WriteLine("Ben venuto giocatore, questo e' il gioco dell impiccato.\n" +
     "Buona fortuna giocatore e buon divertimento");
 string difficolta = "";
 Console.WriteLine();
-Console.WriteLine("se hai scelto cibi, lavori o animiali\n" +
+Console.WriteLine("se hai scelto cibi, lavori o animali\n" +
                   "hai a disposizione 7 tentativi");
 Console.WriteLine();
 string argomento = Console.ReadLine();
@@ -17,6 +18,9 @@ char[] lettere;
 string parolaScelta = "";
 string lettere_mem = " ";
 int tentativo = 0;
+int punti = 0, somma = 0;
+string parola_piena = "";
+string prova = "";
 //CONTROLLO DIFFICOLTA' E PAROLE A TEMA:
 for (int j = 0; j < 1; j++)
 {
@@ -27,7 +31,7 @@ for (int j = 0; j < 1; j++)
         "media(2), 10 tentativi\n" +
         "difficile(3), 5 tentativi");
         difficolta = Console.ReadLine();
-        //difficolta
+        //DIFFICOLTA'
         for (int i = 0; i < 3; i++)
         {
             if (difficolta == "facile" || difficolta == "1")
@@ -68,6 +72,7 @@ for (int j = 0; j < 1; j++)
             int f = rdn.Next(lines1.Length);
             parolaScelta = lines1[f];
             trattino = new string('_', parolaScelta.Length);
+
             
         }
         else if (difficolta == "media" || difficolta == "2")
@@ -169,7 +174,7 @@ while (tentativo > 0 && trattino.Contains("_"))
     }
 
     trattino = new string(lettere);  // Ricostruisco la stringa trattino data la variabile lettere
-
+    //RIEMPIMENTO PAROLA
     if (lettera_trovata)
     {
         Console.ForegroundColor = ConsoleColor.Green;
@@ -180,12 +185,67 @@ while (tentativo > 0 && trattino.Contains("_"))
         tentativo--;
         Console.WriteLine("Lettera non trovata.");
     }
+    Console.ForegroundColor = ConsoleColor.Red;
+    Console.WriteLine("Se hai capito qual' e' la parola giusta prova a indovinarla tutta di fila.\n" +
+                      "Ma fai attenzione perche in caso tu sbagliassi avrai perso\n" +
+                      "e i tuoi tentativi verranno azzerati\n" +
+                      "In caso tu volessi prova scrivi si, se non vuoi rischiare scrivi no");
+    prova = Console.ReadLine();
+    if (prova == "si" || prova == "SI")
+    {
+        Console.WriteLine("prova pure");
+        parola_piena = Console.ReadLine();
+        if (trattino.Contains("_"))
+        {
+            Console.WriteLine("Hai vinto sei riuscito a indovinare la parola complimenti!!!");
+            Console.ForegroundColor = ConsoleColor.Green;
+            trattino = parolaScelta;
+        }
+        else
+        {
+            Console.WriteLine("Oh no, hai sbagliato parola. Peccato la prossima volta ragionaci di piu'");
+            tentativo = 0;
+        }
+    }
+    else if (prova == "no" || prova == "NO")
+    {
 
+    }
+    //PUNTEGGIO
+    if (difficolta == "facile" || difficolta == "1" && !trattino.Contains("_"))
+    {
+        punti = 5;
+    }
+    else if (difficolta == "media" || difficolta == "2" && !trattino.Contains("_"))
+    {
+        punti = 10;
+    }
+    else if (difficolta == "difficile" || difficolta == "3" && !trattino.Contains("_"))
+    {
+        punti = 15;
+    }
+    if (argomento == "cibi" || argomento == "2" && !trattino.Contains("_"))
+    {
+        punti = 10;
+    }
+    else if (argomento == "lavori" || argomento == "3" && !trattino.Contains("_"))
+    {
+        punti = 10;
+    }
+    else if (argomento == "animali" || argomento == "4" && !trattino.Contains("_"))
+    {
+        punti = 10;
+    }
+    
+    //PAROLA FINALE
     if (!trattino.Contains("_"))
     {
+        Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("Hai indovinato la parola: " + parolaScelta);
-        break;
+        somma += punti;
+        Console.WriteLine("Hai totalizzato un certo numero di punti: " + somma);
     }
+
 }
 Console.ForegroundColor = ConsoleColor.White;
 
