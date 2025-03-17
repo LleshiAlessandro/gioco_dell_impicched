@@ -2,21 +2,24 @@
 
 Console.WriteLine("Ben venuto giocatore, questo e' il gioco dell impiccato.\n" +
     "Questo gioco consiste nell cercare di indovinare la parola con un massimo di errori.\n" +
-    "Puoi scegliere l'argomento delle parole, hai la possibilita' di fare una modalita' normale(1) con parole randomiche\n" +
+    "Puoi scegliere delle parole a tema, hai la possibilita' di fare una modalita' normale(1) con parole randomiche\n" +
     "oppure puoi scegliere solo cibi(2), solo lavori(3) oppure solo animali(4)\n" +
     "Hai a disposizione di tre diffolta, facile(1), media(2) e difficile(3)'.\n" +
     "Buona fortuna giocatore e buon divertimento");
 string difficolta = "";
-int tentativo = 0;
+Console.WriteLine();
 Console.WriteLine("se hai scelto cibi, lavori o animiali\n" +
                   "hai a disposizione 7 tentativi");
+Console.WriteLine();
 string argomento = Console.ReadLine();
 string trattino = " ";
-string parolaTrovata = " ";
 char[] lettere;
 string parolaScelta = "";
-//CONTROLLO DIFFICOLTA' E ARGOMENTO:
-for (int j = 0; j < 1; j++) {
+string lettere_mem = " ";
+int tentativo = 0;
+//CONTROLLO DIFFICOLTA' E PAROLE A TEMA:
+for (int j = 0; j < 1; j++)
+{
     if (argomento == "normale" || argomento == "1")
     {
         Console.WriteLine("Che difficoltà scegli ?\n" +
@@ -24,6 +27,7 @@ for (int j = 0; j < 1; j++) {
         "media(2), 10 tentativi\n" +
         "difficile(3), 5 tentativi");
         difficolta = Console.ReadLine();
+        //difficolta
         for (int i = 0; i < 3; i++)
         {
             if (difficolta == "facile" || difficolta == "1")
@@ -51,7 +55,6 @@ for (int j = 0; j < 1; j++) {
                 j = 0;
                 difficolta = Console.ReadLine();
             }
-            Console.WriteLine("I tuoi tentativi rimasti sono: " + tentativo);
         }
         //IDENTIFICO LA PAROLA SCELTA RANDOMICAMENTE DOPO LA DIFFICOLTA'
         //aggiungere una if che controlla se la parola è stata trovata e in caso si aggiungere un for che crei una nuova parola
@@ -65,7 +68,7 @@ for (int j = 0; j < 1; j++) {
             int f = rdn.Next(lines1.Length);
             parolaScelta = lines1[f];
             trattino = new string('_', parolaScelta.Length);
-            Console.WriteLine(trattino);
+            
         }
         else if (difficolta == "media" || difficolta == "2")
         {
@@ -77,7 +80,6 @@ for (int j = 0; j < 1; j++) {
             int m = rdn.Next(lines2.Length);
             parolaScelta = lines2[m];
             trattino = new string('_', parolaScelta.Length);
-            Console.WriteLine(trattino);
         }
         else if (difficolta == "difficile" || difficolta == "3")
         {
@@ -89,12 +91,11 @@ for (int j = 0; j < 1; j++) {
             int d = rdn.Next(lines3.Length);
             parolaScelta = lines3[d];
             trattino = new string('_', parolaScelta.Length);
-            Console.WriteLine(trattino);
         }
     }
     else if (argomento == "cibi" || argomento == "2")
     {
-        Console.WriteLine("l'argomento che hai scelto è: cibi" );
+        Console.WriteLine("l'argomento che hai scelto è: cibi");
         tentativo = 7;
         string filePath4 = "cibi.txt";
         string[] lines4 = File.ReadAllLines(filePath4); // Legge tutte le righe e le mette in un vettore
@@ -102,7 +103,6 @@ for (int j = 0; j < 1; j++) {
         int c = rdn.Next(lines4.Length);
         parolaScelta = lines4[c];
         trattino = new string('_', parolaScelta.Length);
-        Console.WriteLine(trattino);
         j = 1;
     }
     else if (argomento == "lavori" || argomento == "3")
@@ -115,7 +115,6 @@ for (int j = 0; j < 1; j++) {
         int l = rdn.Next(lines5.Length);
         parolaScelta = lines5[l];
         trattino = new string('_', parolaScelta.Length);
-        Console.WriteLine(trattino);
         j = 1;
     }
     else if (argomento == "animali" || argomento == "4")
@@ -128,7 +127,6 @@ for (int j = 0; j < 1; j++) {
         int a = rdn.Next(lines5.Length);
         parolaScelta = lines5[a];
         trattino = new string('_', parolaScelta.Length);
-        Console.WriteLine(trattino);
         j = 1;
     }
     else
@@ -137,13 +135,21 @@ for (int j = 0; j < 1; j++) {
         j = 0;
         argomento = Console.ReadLine();
     }
+    Console.WriteLine("I tuoi tentativi rimasti sono: " + tentativo);
+    Console.Write(trattino);
+    Console.WriteLine("(" + trattino.Length + ")");
 }
-//tovare un modo per far si che quando si indovina una lettera venga scrutta ma le restanti no
+//CICLO CHE STAMPA LE LETTERE INDOVINATE
 while (tentativo > 0 && trattino.Contains("_"))
 {
+    Console.ForegroundColor = ConsoleColor.Red;
     Console.WriteLine("\nTentativi rimasti: " + tentativo);
+    Console.WriteLine();
     Console.Write("Indovina una lettera: ");
     char lettera_indovinata = char.ToLower(Console.ReadKey().KeyChar);
+    Console.WriteLine();
+    lettere_mem += lettera_indovinata + "-";
+    Console.WriteLine("le lettere che hai inserito sono:" + lettere_mem);
     Console.WriteLine();
     bool lettera_trovata = false;
 
@@ -166,6 +172,7 @@ while (tentativo > 0 && trattino.Contains("_"))
 
     if (lettera_trovata)
     {
+        Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("Parola attuale: " + trattino);
     }
     else
@@ -180,6 +187,7 @@ while (tentativo > 0 && trattino.Contains("_"))
         break;
     }
 }
+Console.ForegroundColor = ConsoleColor.White;
 
 if (tentativo == 0)
 {
