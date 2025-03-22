@@ -25,13 +25,13 @@ while (indovinaP > 0)
     char[] lettere;
     string parolaScelta = "";
     string lettere_mem = " ";
-    int tentativo = 0;
-    int punti = 0, somma = 0;
+    int punti = 0, somma = 0, jolly2 = 0, monete = 2, tentativo = 0, ind = 0;
     string parola_piena = "";
     string prova = "";
     string jolly = " ";
-    int jolly2 = 0;
+    string indizio = " ";
     bool jollyUsato = false;
+    bool indizioUsato = false;
     //CONTROLLO DIFFICOLTA' E PAROLE A TEMA:
     for (int j = 0; j < 1; j++)
     {
@@ -158,120 +158,124 @@ while (indovinaP > 0)
 
     while (tentativo > 0 && trattino.Contains("_"))
     {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("\nTentativi rimasti: " + tentativo);
-            Console.WriteLine();
-            Console.Write("Indovina una lettera: ");
-            char lettera_indovinata = char.ToLower(Console.ReadKey().KeyChar);
-            Console.WriteLine();
-            lettere_mem += lettera_indovinata + "-";
-            Console.WriteLine("le lettere che hai inserito sono:" + lettere_mem);
-            Console.WriteLine();
-            bool lettera_trovata = false;
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("\nTentativi rimasti: " + tentativo);
+        Console.WriteLine();
+        Console.Write("Indovina una lettera: ");
+        char lettera_indovinata = char.ToLower(Console.ReadKey().KeyChar);
+        Console.WriteLine();
+        lettere_mem += lettera_indovinata + "-";
+        Console.WriteLine("le lettere che hai inserito sono:" + lettere_mem);
+        Console.WriteLine();
+        bool lettera_trovata = false;
 
-            lettere = new char[trattino.Length];  // Creo un array di caratteri con la stessa lunghezza della stringa
-            for (int i = 0; i < trattino.Length; i++)
+        lettere = new char[trattino.Length];  // Creo un array di caratteri con la stessa lunghezza della stringa
+        for (int i = 0; i < trattino.Length; i++)
+        {
+            lettere[i] = trattino[i];  // Copio ogni carattere di trattino nell'array lettere
+        }
+
+        for (int i = 0; i < parolaScelta.Length; i++)
+        {
+            if (parolaScelta[i] == lettera_indovinata && lettere[i] == '_')
             {
-                lettere[i] = trattino[i];  // Copio ogni carattere di trattino nell'array lettere
+                lettere[i] = lettera_indovinata;
+                lettera_trovata = true;
             }
+        }
 
-            for (int i = 0; i < parolaScelta.Length; i++)
-            {
-                if (parolaScelta[i] == lettera_indovinata && lettere[i] == '_')
-                {
-                    lettere[i] = lettera_indovinata;
-                    lettera_trovata = true;
-                }
-            }
+        trattino = new string(lettere);  // Ricostruisco la stringa trattino data la variabile lettere
+                                         //RIEMPIMENTO PAROLA
+        if (lettera_trovata)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Parola attuale: " + trattino);
+        }
+        else
+        {
+            tentativo--;
+            Console.WriteLine("Lettera non trovata.");
+        }
 
-            trattino = new string(lettere);  // Ricostruisco la stringa trattino data la variabile lettere
-                                             //RIEMPIMENTO PAROLA
-            if (lettera_trovata)
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine();
+        Console.WriteLine();
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine("Se hai capito qual' e' la parola giusta prova a indovinarla tutta di fila.\n" +
+                          "Ma fai attenzione perche in caso tu sbagliassi avrai perso\n" +
+                          "e i tuoi tentativi verranno azzerati\n" +
+                          "In caso tu volessi prova scrivi si, se non vuoi rischiare scrivi no");
+        prova = Console.ReadLine();
+        if (prova == "si" || prova == "SI")
+        {
+            Console.WriteLine("prova pure");
+            parola_piena = Console.ReadLine();
+            if (trattino.Contains("_"))
             {
+                Console.WriteLine("Hai vinto sei riuscito a indovinare la parola complimenti!!!");
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Parola attuale: " + trattino);
+                trattino = parolaScelta;
             }
             else
             {
-                tentativo--;
-                Console.WriteLine("Lettera non trovata.");
+                Console.WriteLine("Oh no, hai sbagliato parola. Peccato la prossima volta ragionaci di piu'");
+                tentativo = 0;
             }
+        }
+        else if (prova == "no" || prova == "NO")
+        {
 
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine("Se hai capito qual' e' la parola giusta prova a indovinarla tutta di fila.\n" +
-                              "Ma fai attenzione perche in caso tu sbagliassi avrai perso\n" +
-                              "e i tuoi tentativi verranno azzerati\n" +
-                              "In caso tu volessi prova scrivi si, se non vuoi rischiare scrivi no");
-            prova = Console.ReadLine();
-            if (prova == "si" || prova == "SI")
-            {
-                Console.WriteLine("prova pure");
-                parola_piena = Console.ReadLine();
-                if (trattino.Contains("_"))
-                {
-                    Console.WriteLine("Hai vinto sei riuscito a indovinare la parola complimenti!!!");
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    trattino = parolaScelta;
-                }
-                else
-                {
-                    Console.WriteLine("Oh no, hai sbagliato parola. Peccato la prossima volta ragionaci di piu'");
-                    tentativo = 0;
-                }
-            }
-            else if (prova == "no" || prova == "NO")
-            {
-
-            }
-            //PUNTEGGIO
-            if (difficolta == "facile" || difficolta == "1" && !trattino.Contains("_"))
-            {
-                punti = 5;
-            }
-            else if (difficolta == "media" || difficolta == "2" && !trattino.Contains("_"))
-            {
-                punti = 10;
-            }
-            else if (difficolta == "difficile" || difficolta == "3" && !trattino.Contains("_"))
-            {
-                punti = 15;
-            }
-            if (argomento == "cibi" || argomento == "2" && !trattino.Contains("_"))
-            {
-                punti = 10;
-            }
-            else if (argomento == "lavori" || argomento == "3" && !trattino.Contains("_"))
-            {
-                punti = 10;
-            }
-            else if (argomento == "animali" || argomento == "4" && !trattino.Contains("_"))
-            {
-                punti = 10;
-            }
+        }
+        Console.ForegroundColor = ConsoleColor.Red;
+        //PUNTEGGIO
+        if (difficolta == "facile" || difficolta == "1" && !trattino.Contains("_"))
+        {
+            punti = 5;
+        }
+        else if (difficolta == "media" || difficolta == "2" && !trattino.Contains("_"))
+        {
+            punti = 10;
+        }
+        else if (difficolta == "difficile" || difficolta == "3" && !trattino.Contains("_"))
+        {
+            punti = 15;
+        }
+        if (argomento == "cibi" || argomento == "2" && !trattino.Contains("_"))
+        {
+            punti = 10;
+        }
+        else if (argomento == "lavori" || argomento == "3" && !trattino.Contains("_"))
+        {
+            punti = 10;
+        }
+        else if (argomento == "animali" || argomento == "4" && !trattino.Contains("_"))
+        {
+            punti = 10;
+        }
 
 
-            //PAROLA FINALE
-            if (!trattino.Contains("_"))
-            {
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Hai indovinato la parola: " + parolaScelta);
-                somma += punti;
-                Console.WriteLine("Hai totalizzato un certo numero di punti: " + somma);
-            }
+        //PAROLA FINALE
+        if (!trattino.Contains("_"))
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Hai indovinato la parola: " + parolaScelta);
+            somma += punti;
+            Console.WriteLine("Hai totalizzato un certo numero di punti: " + somma);
+        }
+        Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine("hai diverse opzioni quando giochi.\n" +
             "Ad esemopio potresti continuare a indovinare la parola(digita g)\n" +
             "oppure potresti usare una lettera jolly(j) come aiuto\n" +
             "oppure hai addirittura la possibilità di capire altre lettere ma avranno un costo(a)");
         string menu = Console.ReadLine();
-        if (menu == "j" || menu == "J" || menu == "jolly")// non mi funziona il jolly
+        //Jolly
+        if (menu == "j" || menu == "J" || menu == "jolly")
         {
             if (jollyUsato == false)
             {
-                Random rnd= new Random();
-                jolly2 = rnd.Next(trattino[0], trattino[parolaScelta.Length - 1]);
-                jolly += trattino[jolly2];
+                Random rnd = new Random();
+                jolly2 = rnd.Next(0, parolaScelta.Length);
+                jolly += parolaScelta[jolly2];
                 Console.WriteLine(jolly);
             }
             else if (jollyUsato == true)
@@ -279,12 +283,44 @@ while (indovinaP > 0)
                 Console.WriteLine("Hai già usato il jolly");
             }
         }
+        else if (menu == "a" || menu == "A")
+        {
+            if (indizioUsato == false && monete > 0)
+            {
+                monete--;
+
+                if (trattino.Contains("_"))
+                {
+                    bool a = true;
+                    while (a)
+                    {
+                        Random rnd = new Random();
+                        ind = rnd.Next(0, parolaScelta.Length);
+                        if (trattino[ind] == '_')
+                        {
+                            indizio += parolaScelta[ind];
+                            Console.WriteLine(indizio);
+                            a = false;
+                        }
+                    }
+                }
+                if (monete <= 0)
+                {
+                    indizioUsato = true;
+                }
+            }
+            else if (indizioUsato == true)
+            {
+                Console.WriteLine("Hai già usato un indizio\n" +
+                    "monete rimantenti:" + monete);
+            }
+        }
         else
         {
             Console.WriteLine("Probabilmente hai sbagliato a digitare, ma tranquillo riprova pure");
             menu = Console.ReadLine();
         }
-    
+        Console.ForegroundColor = ConsoleColor.Red;
     }
     Console.ForegroundColor = ConsoleColor.White;
     if (tentativo == 0)
